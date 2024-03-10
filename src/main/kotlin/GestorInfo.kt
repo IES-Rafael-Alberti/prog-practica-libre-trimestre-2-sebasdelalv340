@@ -1,13 +1,14 @@
 
 interface GestorInformacion {
-    var historial: MutableMap<String, MutableMap<String, String>>
+    val historial: MutableMap<String, MutableMap<String, String>>
     fun mostrarInfoUsuario(usuario: Usuario)
     fun mostrarInfo(usuario: Usuario, entrenamiento: Entrenamiento)
 }
 
 
-class GestorInfoEntrenamiento(override var historial: MutableMap<String, MutableMap<String, String>>): GestorInformacion {
+class GestorInfoEntrenamiento: GestorInformacion {
 
+    override lateinit var historial: MutableMap<String, MutableMap<String, String>>
 
     override fun mostrarInfoUsuario(usuario: Usuario) {
         println("Hola ${usuario.nombre}.")
@@ -43,4 +44,47 @@ class GestorInfoEntrenamiento(override var historial: MutableMap<String, Mutable
             }
         }
     }
+
+    fun registrarEntrenamiento(entrenamiento: Entrenamiento, usuario: Usuario) {
+        when (entrenamiento) {
+            is Ciclismo -> historial[usuario.nombre] = mutableMapOf("Ciclismo" to entrenamiento.toString())
+            is Running -> historial[usuario.nombre] = mutableMapOf("Running" to entrenamiento.toString())
+            is Natacion -> historial[usuario.nombre] = mutableMapOf("Natación" to entrenamiento.toString())
+        }
+    }
+
+    fun mostrarHistorialRunning(usuario: Usuario) {
+        val entrenamientosRunning = (historial[usuario.nombre]?.filterKeys { it == "Running" }?.values)
+
+        println("* Running *")
+        if (entrenamientosRunning != null) {
+            entrenamientosRunning.forEach { println(it) }
+        } else {
+            println("No se encontraron entrenamientos de Running.")
+        }
+    }
+
+    fun mostrarHistorialCiclismo(usuario: Usuario) {
+        val entrenamientosCiclismo = (historial[usuario.nombre]?.filterKeys { it == "Running" }?.values)
+
+        println("* Ciclismo *")
+        if (entrenamientosCiclismo != null) {
+            entrenamientosCiclismo.forEach { println(it) }
+        } else {
+            println("No se encontraron entrenamientos de Running.")
+        }
+    }
+
+    fun mostrarHistorialNatacion(usuario: Usuario) {
+        val entrenamientosNatacion = (historial[usuario.nombre]?.filterKeys { it == "Running" }?.values)
+
+        println("* Natación *")
+        if (entrenamientosNatacion != null) {
+            entrenamientosNatacion.forEach { println(it) }
+        } else {
+            println("No se encontraron entrenamientos de Running.")
+        }
+    }
 }
+
+

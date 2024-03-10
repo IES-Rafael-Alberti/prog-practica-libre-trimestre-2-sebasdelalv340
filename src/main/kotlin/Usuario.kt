@@ -4,7 +4,7 @@ enum class TipoGenero(val sexo: String) {
 
 class Usuario(nombre: String, val genero: TipoGenero, var edad: Int, val altura: Int, var peso: Double) {
 
-    var nombre: String = comprobarNombre(nombre)
+    var nombre: String = nombre
         get() = capitalizar(field)
 
     init {
@@ -14,20 +14,12 @@ class Usuario(nombre: String, val genero: TipoGenero, var edad: Int, val altura:
     }
 
     companion object {
-        private var listaNombre: MutableSet<String> = mutableSetOf()
     }
 
     override fun toString(): String {
         return "$nombre, género: ${genero.sexo}, edad: $edad, altura: $altura y peso: $peso."
     }
 
-
-    private fun comprobarNombre(nombre: String): String {
-        val nombreAComprobar = nombre.lowercase().trim()
-        require(nombre.isNotEmpty()) {"El $nombre no puede estar vacío."}
-        listaNombre.add(nombreAComprobar)
-        return nombreAComprobar
-    }
 
     private fun capitalizar(nombre: String): String {
         return nombre.split(" ").joinToString(" ") { it.replaceFirstChar { it.uppercase()} }

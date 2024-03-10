@@ -1,9 +1,5 @@
 class GestorEntrenamiento() {
 
-    fun realizarEntrenamiento(){
-
-    }
-
     private fun menuPrincipal(usuario: Usuario) {
         println("Hola ${usuario.nombre}")
         println("¿Qué desea hacer?")
@@ -12,24 +8,30 @@ class GestorEntrenamiento() {
         println("3. Salir.")
     }
 
-    private fun menuHistorial() {
+    private fun menuHistorial(usuario: Usuario, gestorInfoEntrenamiento: GestorInfoEntrenamiento) {
         var opcion: Int
         do {
-            println("¿Qué entrenamiento vas a realizar?")
-            println("1. Running")
-            println("2. Ciclismo")
-            println("3. Natación")
-            println("4. Atrás.")
+            println("¿Qué historial desea ver?")
+            println("1. Historial de running.")
+            println("2. Historial de ciclismo.")
+            println("3. Historial de natación.")
+            println("4. Historial completo.")
+            println("5. Atrás.")
             opcion = obtenerOpcion()
 
             when (opcion) {
-                1 -> println("Realizar entrenamiento de running.")
-                2 -> println("Realizar entrenamiento de ciclismo.")
-                3 -> println("Realizar entrenamiento de natación.")
-                4 -> println("Volviendo al menú principal.")
+                1 -> gestorInfoEntrenamiento.mostrarHistorialRunning(usuario)
+                2 -> gestorInfoEntrenamiento.mostrarHistorialCiclismo(usuario)
+                3 -> gestorInfoEntrenamiento.mostrarHistorialNatacion(usuario)
+                4 -> {
+                    gestorInfoEntrenamiento.mostrarHistorialRunning(usuario)
+                    gestorInfoEntrenamiento.mostrarHistorialCiclismo(usuario)
+                    gestorInfoEntrenamiento.mostrarHistorialNatacion(usuario)
+                }
+                5 -> println("Volviendo al menú principal.")
                 else -> println("Opción no válida")
             }
-        } while (opcion != 4)
+        } while (opcion != 5)
     }
 
     private fun menuEntrenamiento() {
@@ -52,7 +54,7 @@ class GestorEntrenamiento() {
         } while (opcion != 4)
     }
 
-    fun controlMenus(usuario: Usuario) {
+    fun controlMenus(usuario: Usuario, gestorInfoEntrenamiento: GestorInfoEntrenamiento) {
         var opcion: Int
 
         do {
@@ -61,7 +63,7 @@ class GestorEntrenamiento() {
 
             when (opcion) {
                 1 -> menuEntrenamiento()
-                2 -> menuHistorial()
+                2 -> menuHistorial(usuario, gestorInfoEntrenamiento)
                 3 -> println("Hasta luego!")
                 else -> println("Opción no válida")
             }
@@ -88,34 +90,7 @@ class GestorEntrenamiento() {
         return opcion
     }
 
-    fun recogerOpcion(usuario: Usuario, gestorInfoEntrenamiento: GestorInfoEntrenamiento) {
-        val opcion = obtenerOpcion()
 
-        when (opcion) {
-            1 -> {
-                mostrarEntrenando()
-                if (pedirRegistro()) { // Devuelve boolean, tenerlo en cuenta
-                    registrarEntrenamiento(pedirDatosCiclismo(usuario), gestorInfoEntrenamiento, usuario)
-                }
-                println("Seleccionaste Running")
-            }
-
-            2 -> {
-                mostrarEntrenando()
-                println("Seleccionaste Ciclismo")
-            }
-
-            3 -> {
-                mostrarEntrenando()
-                println("Seleccionaste Natación")
-            }
-
-            4 -> {
-                println("Hasta luego!")
-                // Aquí puedes añadir cualquier otra lógica de salida que necesites
-            }
-        }
-    }
 
     fun pedirRegistro(): Boolean {
         print("¿Quieres registrar la actividad? (s/n): ")
@@ -186,8 +161,6 @@ class GestorEntrenamiento() {
         } while (continuar)
         return tiempo
     }
-
-
 
 
     fun registrarEntrenamiento(entrenamiento: Entrenamiento, gestorInfoEntrenamiento: GestorInfoEntrenamiento, usuario: Usuario) {
