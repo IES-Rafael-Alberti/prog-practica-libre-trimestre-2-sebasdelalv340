@@ -31,14 +31,14 @@ class GestorInfoEntrenamiento: GestorInformacion {
                 println("* Datos de tu carrera *")
                 println("\nDistancia: ${entrenamiento.calcularDistancia()} km.")
                 println("Tiempo total: ${entrenamiento.horas} horas, ${entrenamiento.minutos} minutos y ${entrenamiento.segundos} segundos.")
-                println("Ritmo: ${entrenamiento.calcularRitmo()} min/km.")
+                println("Ritmo: ${entrenamiento.formatoRitmo()} min/km.")
                 println("Calorías quemadas: ${entrenamiento.calcularCalorias(usuario)} calorías.")
             }
             is Natacion -> {
                 println("* Datos de tu natación *")
                 println("\nDistancia: ${entrenamiento.calcularDistancia()} km.")
                 println("Tiempo total: ${entrenamiento.horas} horas, ${entrenamiento.minutos} minutos y ${entrenamiento.segundos} segundos.")
-                println("Ritmo: ${entrenamiento.calcularRitmo()} min/km.")
+                println("Ritmo: ${entrenamiento.formatoRitmo()} min/km.")
                 println("Brazadas: ${entrenamiento.calcularBrazadas(usuario)}.")
                 println("Calorías quemadas: ${entrenamiento.calcularCalorias(usuario)} calorías.")
             }

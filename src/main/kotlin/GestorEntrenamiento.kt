@@ -34,7 +34,7 @@ class GestorEntrenamiento() {
         } while (opcion != 5)
     }
 
-    private fun menuEntrenamiento() {
+    private fun menuEntrenamiento(usuario: Usuario, gestorInfoEntrenamiento: GestorInfoEntrenamiento) {
         var opcion: Int
         do {
             println("¿Qué entrenamiento vas a realizar?")
@@ -45,9 +45,27 @@ class GestorEntrenamiento() {
             opcion = obtenerOpcion()
 
             when (opcion) {
-                1 -> println("Realizar entrenamiento de running.")
-                2 -> println("Realizar entrenamiento de ciclismo.")
-                3 -> println("Realizar entrenamiento de natación.")
+                1 -> {
+                    mostrarEntrenando()
+                    if (pedirRegistro()) {
+                        val datosRunning = pedirDatosRunning(usuario)
+                        registrarEntrenamiento(datosRunning, gestorInfoEntrenamiento, usuario)
+                    }
+                }
+                2 -> {
+                    mostrarEntrenando()
+                    if (pedirRegistro()) {
+                        val datosCiclismo = pedirDatosCiclismo(usuario)
+                        registrarEntrenamiento(datosCiclismo, gestorInfoEntrenamiento, usuario)
+                    }
+                }
+                3 -> {
+                    mostrarEntrenando()
+                    if (pedirRegistro()) {
+                        val datosNatacion = pedirDatosNatacion(usuario)
+                        registrarEntrenamiento(datosNatacion, gestorInfoEntrenamiento, usuario)
+                    }
+                }
                 4 -> println("Volviendo al menú principal.")
                 else -> println("Opción no válida")
             }
@@ -62,7 +80,7 @@ class GestorEntrenamiento() {
             opcion = obtenerOpcion()
 
             when (opcion) {
-                1 -> menuEntrenamiento()
+                1 -> menuEntrenamiento(usuario, gestorInfoEntrenamiento)
                 2 -> menuHistorial(usuario, gestorInfoEntrenamiento)
                 3 -> println("Hasta luego!")
                 else -> println("Opción no válida")
@@ -128,6 +146,40 @@ class GestorEntrenamiento() {
         val segundos = pedirTiempo()
 
         return Ciclismo(km, metros, horas, minutos, segundos, usuario)
+    }
+
+    fun pedirDatosRunning(usuario: Usuario): Entrenamiento {
+        println("Introduce la distancia")
+        print("Kilómetros: ")
+        val km = pedirDistancia()
+        print("Metros: ")
+        val metros = pedirDistancia()
+        println("Introduce el tiempo")
+        print("Horas: ")
+        val horas = pedirTiempo()
+        print("Minutos: ")
+        val minutos = pedirTiempo()
+        print("Segundos: ")
+        val segundos = pedirTiempo()
+
+        return Running(km, metros, horas, minutos, segundos, usuario)
+    }
+
+    fun pedirDatosNatacion(usuario: Usuario): Entrenamiento {
+        println("Introduce la distancia")
+        print("Kilómetros: ")
+        val km = pedirDistancia()
+        print("Metros: ")
+        val metros = pedirDistancia()
+        println("Introduce el tiempo")
+        print("Horas: ")
+        val horas = pedirTiempo()
+        print("Minutos: ")
+        val minutos = pedirTiempo()
+        print("Segundos: ")
+        val segundos = pedirTiempo()
+
+        return Natacion(km, metros, horas, minutos, segundos, usuario)
     }
 
     private fun pedirDistancia(): Int {

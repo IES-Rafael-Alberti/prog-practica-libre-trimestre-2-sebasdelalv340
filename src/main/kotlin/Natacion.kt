@@ -11,7 +11,7 @@ class Natacion(km: Int, metros: Int, horas: Int, minutos: Int, segundos: Int, us
     }
 
     override fun toString(): String {
-        return "Tiempo total: ${calcularTiempo()}, distancia: ${calcularDistancia()}, ritmo: ${calcularRitmo()} y $brazadas."
+        return "Tiempo total: ${calcularTiempo()} min, distancia: ${calcularDistancia()} km, ritmo: ${formatoRitmo()} min/km, nº de brazadas: $brazadas y calorías quemadas: $caloriasQuemadas kcal)."
     }
 }
 

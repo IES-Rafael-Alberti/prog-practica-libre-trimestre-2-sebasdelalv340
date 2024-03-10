@@ -29,6 +29,12 @@ abstract class Entrenamiento(val km: Int, val metros: Int, val horas: Int, val m
         return (calcularTiempo() / calcularDistancia()) //Devuelve el ritmo en min/km
     }
 
+    fun formatoRitmo(): String { // Transforma el ritmo en string 'minutos:segundos'
+        val minutos = calcularRitmo().toInt()
+        val segundos = ((calcularRitmo() - minutos) * TIEMPO).toInt()
+        return "$minutos:$segundos"
+    }
+
     fun calcularCalorias(usuario: Usuario): Double { //Devuelve kcal
         if (usuario.genero == TipoGenero.HOMBRE) {
             val metabolismoBasal = MB_HOMBRES + (MB_PESO_HOMBRES * usuario.peso) + (MB_ALTURA_HOMBRE * usuario.altura) + (MB_EDAD_HOMBRE * usuario.edad)
@@ -41,7 +47,7 @@ abstract class Entrenamiento(val km: Int, val metros: Int, val horas: Int, val m
     }
 
     override fun toString(): String {
-        return "Entrenamiento(Tiempo total: ${calcularTiempo()}, distancia: ${calcularDistancia()}, ritmo: ${calcularRitmo()} y calorias quemadas: $caloriasQuemadas)."
+        return "Entrenamiento(Tiempo total: ${calcularTiempo()}, distancia: ${calcularDistancia()}, ritmo: ${calcularRitmo()} y calorias quemadas: $caloriasQuemadas kcal)."
     }
 }
 
