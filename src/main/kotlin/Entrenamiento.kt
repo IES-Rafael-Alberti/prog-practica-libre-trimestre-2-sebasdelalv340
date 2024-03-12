@@ -1,6 +1,15 @@
-abstract class Entrenamiento(val km: Int, val metros: Int, val horas: Int, val minutos: Int, val segundos: Int, usuario: Usuario){
+import kotlin.math.pow
+import kotlin.math.roundToInt
 
-    var caloriasQuemadas: Double = calcularCalorias(usuario)
+fun Double.redondear(posiciones: Int): Double {
+    val factor = 10.0.pow(posiciones)
+    return (this * factor).roundToInt() / factor
+}
+
+
+abstract class Entrenamiento(private val km: Int, private val metros: Int, val horas: Int, val minutos: Int, val segundos: Int, usuario: Usuario){
+
+    var caloriasQuemadas: Double = calcularCalorias(usuario).redondear(2)
 
     companion object {
         const val TIEMPO = 60
@@ -26,7 +35,7 @@ abstract class Entrenamiento(val km: Int, val metros: Int, val horas: Int, val m
     }
 
     fun calcularRitmo(): Double {
-        return (calcularTiempo() / calcularDistancia()) //Devuelve el ritmo en min/km
+        return calcularTiempo() / calcularDistancia() //Devuelve el ritmo en min/km
     }
 
     fun formatoRitmo(): String { // Transforma el ritmo en string 'minutos:segundos'
@@ -36,10 +45,10 @@ abstract class Entrenamiento(val km: Int, val metros: Int, val horas: Int, val m
     }
 
     fun calcularCalorias(usuario: Usuario): Double { //Devuelve kcal
-        if (usuario.genero == TipoGenero.HOMBRE) {
+        if (usuario.genero.sexo == TipoGenero.HOMBRE.sexo) {
             val metabolismoBasal = MB_HOMBRES + (MB_PESO_HOMBRES * usuario.peso) + (MB_ALTURA_HOMBRE * usuario.altura) + (MB_EDAD_HOMBRE * usuario.edad)
             return ((metabolismoBasal * MET) / HORAS_DIA) * (calcularTiempo() / TIEMPO)
-        } else if (usuario.genero == TipoGenero.MUJER) {
+        } else if (usuario.genero.sexo == TipoGenero.MUJER.sexo) {
             val metabolismoBasal = MB_MUJER + (MB_PESO_MUJER * usuario.peso) + (MB_ALTURA_MUJER * usuario.altura) + (MB_EDAD_MUJER * usuario.edad)
             return ((metabolismoBasal * MET) / HORAS_DIA) * (calcularTiempo() / TIEMPO)
         }
