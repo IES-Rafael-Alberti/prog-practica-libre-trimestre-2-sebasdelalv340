@@ -19,7 +19,7 @@ class Ciclismo(km: Int, metros: Int, horas: Int, minutos: Int, segundos: Int, us
     }
 
     override fun toString(): String {
-        return "Tiempo total: ${calcularTiempo()} min, distancia: ${calcularDistancia()} km, ritmo: ${formatoRitmo()} min/km, velocidad media: $vatios W y calorías quemadas: ${"%.2f".format(caloriasQuemadas)} kcal"
+        return "Tiempo total: ${calcularTiempo()} min, distancia: ${calcularDistancia()} km, ritmo: ${formatoRitmo(calcularRitmo())} min/km, velocidad media: $vatios W y calorías quemadas: ${"%.2f".format(caloriasQuemadas)} kcal"
     }
 
 }

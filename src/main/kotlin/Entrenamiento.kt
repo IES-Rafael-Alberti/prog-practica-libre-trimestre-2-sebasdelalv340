@@ -38,9 +38,9 @@ abstract class Entrenamiento(private val km: Int, private val metros: Int, val h
         return calcularTiempo() / calcularDistancia() //Devuelve el ritmo en min/km
     }
 
-    fun formatoRitmo(): String { // Transforma el ritmo en string 'minutos:segundos'
-        val minutos = calcularRitmo().toInt()
-        val segundos = ((calcularRitmo() - minutos) * TIEMPO).toInt()
+    fun formatoRitmo(tiempoEnMinutos: Double): String { // Transforma el ritmo en string 'minutos:segundos'
+        val minutos = tiempoEnMinutos.toInt()
+        val segundos = ((tiempoEnMinutos - minutos) * TIEMPO).toInt()
         return "$minutos:$segundos"
     }
 

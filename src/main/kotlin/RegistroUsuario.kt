@@ -1,6 +1,6 @@
 class RegistroUsuario {
 
-    private var registroUsuarios = mutableMapOf<String, Int>()
+    private var registroUsuarios = mutableListOf<Usuario>()
 
     companion object {
         var registroNombresUsuarios = mutableSetOf<String>()
@@ -170,7 +170,7 @@ class RegistroUsuario {
     }
 
 
-    fun loginUsuario(): MutableMap.MutableEntry<String, Int>? {
+    fun loginUsuario(): Usuario? {
         limpiarConsola()
         println("* Login *")
         val usuario = buscarUsuario(pedirNombreUsuarioRegistrado(), pedirPassword())
@@ -192,18 +192,19 @@ class RegistroUsuario {
         val edad = pedirEdad()
         val altura = pedirAltura()
         val peso = pedirPeso()
-        registroUsuarios[nombre] = pass
-        return Usuario(nombre, sexo, edad, altura, peso, pass)
+        val user = Usuario(nombre, sexo, edad, altura, peso, pass)
+        registroUsuarios.add(user)
+        return user
     }
 
-    private fun buscarUsuario(nombre: String, password: Int): MutableMap.MutableEntry<String, Int>? {
-        return registroUsuarios.entries.find { it.key == nombre && it.value == password}
+    private fun buscarUsuario(nombre: String, pass: Int): Usuario? {
+        return registroUsuarios.find { it.nombre == nombre && it.password == pass }
     }
 
     fun eliminarUsuario() {
         val usuarioEliminar = buscarUsuario(pedirNombreUsuarioRegistrado(), pedirPassword())
         if (usuarioEliminar != null) {
-            registroUsuarios.remove(usuarioEliminar.key)
+            registroUsuarios.remove(usuarioEliminar)
             println("Usuario eliminado.")
         } else {
             println("No se encontrado ningún usuario.")
