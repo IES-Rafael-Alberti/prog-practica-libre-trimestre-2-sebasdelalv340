@@ -1,10 +1,16 @@
 package Consola
 
+/**
+ * Interfaz para definir un notificador que puede enviar mensajes.
+ */
 interface Notificador {
     fun enviar(mensaje: String) {
     }
 }
 
+/**
+ * Interfaz para definir métodos de entrada de datos.
+ */
 interface EntradaDatos {
     fun leerEntero(): Int
 
@@ -13,13 +19,25 @@ interface EntradaDatos {
     fun leerString(): String
 }
 
-
+/**
+ * Objeto único que implementa las interfaces [Notificador] y [EntradaDatos] utilizando la entrada y salida estándar de la consola.
+ */
 object Consola: Notificador, EntradaDatos {
 
+    /**
+     * Printea el mensaje que pasamos por parámetro.
+     *
+     * @param mensaje El mensaje a enviar.
+     */
     override fun enviar(mensaje: String) {
         print(mensaje)
     }
 
+    /**
+     * Lee un entero por consola.
+     *
+     * @return El entero leído.
+     */
     override fun leerEntero(): Int {
         var continuar = true
         var entero = 0
@@ -34,6 +52,11 @@ object Consola: Notificador, EntradaDatos {
         return entero
     }
 
+    /**
+     * Lee un número en punto flotante por consola.
+     *
+     * @return El número en punto flotante leído.
+     */
     override fun leerDouble(): Double{
         var continuar = true
         var double = 0.0
@@ -48,6 +71,11 @@ object Consola: Notificador, EntradaDatos {
         return double
     }
 
+    /**
+     * Lee una cadena de caracteres introducida por consola.
+     *
+     * @return La cadena de caracteres leída.
+     */
     override fun leerString(): String {
         var continuar = true
         var string: String = ""
@@ -80,7 +108,7 @@ object Consola: Notificador, EntradaDatos {
     }
 
     fun menuEntrenamiento() {
-        println("* ACTIVIDADES *")
+        println("\n* ACTIVIDADES *")
         println("1. Running")
         println("2. Ciclismo")
         println("3. Natación")

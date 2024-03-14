@@ -1,23 +1,39 @@
 package Gestores
 
 import Consola.Consola
-import Entrenamiento.Ciclismo
-import Entrenamiento.Entrenamiento
-import Entrenamiento.Natacion
-import Entrenamiento.Running
+import Entrenamiento.*
 import Pila.Pila
 import Usuario.Usuario
 import limpiarConsola
 
+/**
+ * Interfaz que define métodos para gestionar la información de los entrenamientos.
+ */
 interface GestorInformacion {
     var historial: MutableMap<String, MutableMap<String, String>>
+
+    /**
+     * Muestra la información del usuario.
+     *
+     * @param usuario El usuario del cual se mostrará la información.
+     */
     fun mostrarInfoUsuario(usuario: Usuario)
+
+    /**
+     * Muestra la información de un entrenamiento específico.
+     *
+     * @param usuario El usuario al cual pertenece el entrenamiento.
+     * @param entrenamiento El entrenamiento del cual se mostrará la información.
+     */
     fun mostrarInfo(usuario: Usuario, entrenamiento: Entrenamiento)
 }
 
-
+/**
+ * Clase que implementa la interfaz GestorInformacion para gestionar la información de los entrenamientos.
+ */
 class GestorInfoEntrenamiento: GestorInformacion {
 
+    // Mapas y pilas para almacenar información específica de cada tipo de entrenamiento.
     override var historial: MutableMap<String, MutableMap<String, String>> = mutableMapOf()
     private var historialRitmoRunning = mutableMapOf<String, Pila<Double>>()
     private var historialVatiosCiclismo = mutableMapOf<String, Pila<Double>>()
@@ -26,8 +42,12 @@ class GestorInfoEntrenamiento: GestorInformacion {
     private var listaVatiosCiclismo = Pila<Double>()
     private var listaRitmoNatacion = Pila<Double>()
 
+    /**
+     * Muestra la información del usuario.
+     *
+     * @param usuario El usuario del cual se mostrará la información.
+     */
     override fun mostrarInfoUsuario(usuario: Usuario) {
-
         Consola.enviar("\n* DATOS DEL USUARIO *\n")
         Consola.enviar("Nombre: ${usuario.nombre}.\n")
         Consola.enviar("Edad: ${usuario.edad}.\n")
@@ -35,6 +55,12 @@ class GestorInfoEntrenamiento: GestorInformacion {
         Consola.enviar("Altura: ${usuario.altura} cm.\n")
     }
 
+    /**
+     * Muestra la información de un entrenamiento específico.
+     *
+     * @param usuario El usuario al cual pertenece el entrenamiento.
+     * @param entrenamiento El entrenamiento del cual se mostrará la información.
+     */
     override fun mostrarInfo(usuario: Usuario, entrenamiento: Entrenamiento) {
         when (entrenamiento) {
             is Ciclismo -> {
@@ -42,15 +68,15 @@ class GestorInfoEntrenamiento: GestorInformacion {
                 Consola.enviar("\nDistancia: ${entrenamiento.calcularDistancia()} km.\n")
                 Consola.enviar("Tiempo total: ${entrenamiento.horas} horas, ${entrenamiento.minutos} minutos y ${entrenamiento.segundos} segundos.\n")
                 Consola.enviar("Velocidad media: ${entrenamiento.calcularVelocidadMedia()} km/h.\n")
-                Consola.enviar("Vatios: ${entrenamiento.calcularVatios(usuario)} W.\n")
-                Consola.enviar("Calorías quemadas: ${entrenamiento.calcularCalorias(usuario)} calorías.\n")
+                Consola.enviar("Vatios: ${entrenamiento.calcularVatios(usuario).redondear()} W.\n")
+                Consola.enviar("Calorías quemadas: ${entrenamiento.calcularCalorias(usuario).redondear()} calorías.\n")
             }
             is Running -> {
                 Consola.enviar("\n* Datos de tu carrera *\n")
                 Consola.enviar("\nDistancia: ${entrenamiento.calcularDistancia()} km.\n")
                 Consola.enviar("Tiempo total: ${entrenamiento.horas} horas, ${entrenamiento.minutos} minutos y ${entrenamiento.segundos} segundos.\n")
                 Consola.enviar("Ritmo: ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km.\n")
-                Consola.enviar("Calorías quemadas: ${entrenamiento.calcularCalorias(usuario)} calorías.\n")
+                Consola.enviar("Calorías quemadas: ${entrenamiento.calcularCalorias(usuario).redondear()} calorías.\n")
             }
             is Natacion -> {
                 Consola.enviar("\n* Datos de tu natación *\n")
@@ -58,11 +84,16 @@ class GestorInfoEntrenamiento: GestorInformacion {
                 Consola.enviar("Tiempo total: ${entrenamiento.horas} horas, ${entrenamiento.minutos} minutos y ${entrenamiento.segundos} segundos.\n")
                 Consola.enviar("Ritmo: ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km.\n")
                 Consola.enviar("Brazadas: ${entrenamiento.calcularBrazadas(usuario)}.\n")
-                Consola.enviar("Calorías quemadas: ${entrenamiento.calcularCalorias(usuario)} calorías.\n")
+                Consola.enviar("Calorías quemadas: ${entrenamiento.calcularCalorias(usuario).redondear()} calorías.\n")
             }
         }
     }
 
+    /**
+     * Función para registrar un entrenamiento en el historial del usuario.
+     * @param usuario El usuario que realizó el entrenamiento.
+     * @param entrenamiento El entrenamiento que se va a registrar.
+     */
     fun registrarEntrenamiento(usuario: Usuario, entrenamiento: Entrenamiento) {
         when (entrenamiento) {
             is Ciclismo -> historial[usuario.nombre] = mutableMapOf("Entrenamiento.Ciclismo" to entrenamiento.toString())
@@ -71,6 +102,10 @@ class GestorInfoEntrenamiento: GestorInformacion {
         }
     }
 
+    /**
+     * Función para mostrar el historial de entrenamientos de running de un usuario.
+     * @param usuario El usuario del cual se mostrará el historial.
+     */
     fun mostrarHistorialRunning(usuario: Usuario) {
         val entrenamientosRunning = (historial[usuario.nombre]?.filterKeys { it == "Entrenamiento.Running" }?.values)
 
@@ -82,6 +117,10 @@ class GestorInfoEntrenamiento: GestorInformacion {
         }
     }
 
+    /**
+     * Función para mostrar el historial de entrenamientos de ciclismo de un usuario.
+     * @param usuario El usuario del cual se mostrará el historial.
+     */
     fun mostrarHistorialCiclismo(usuario: Usuario) {
         limpiarConsola()
         val entrenamientosCiclismo = historial[usuario.nombre]?.filterKeys { it == "Entrenamiento.Ciclismo" }?.values
@@ -94,6 +133,10 @@ class GestorInfoEntrenamiento: GestorInformacion {
         }
     }
 
+    /**
+     * Función para mostrar el historial de entrenamientos de natación de un usuario.
+     * @param usuario El usuario del cual se mostrará el historial.
+     */
     fun mostrarHistorialNatacion(usuario: Usuario) {
         limpiarConsola()
         val entrenamientosNatacion = historial[usuario.nombre]?.filterKeys { it == "Natación" }?.values
@@ -106,6 +149,11 @@ class GestorInfoEntrenamiento: GestorInformacion {
         }
     }
 
+    /**
+     * Función para actualizar el historial de mejoras del usuario después de un entrenamiento.
+     * @param usuario El usuario que realizó el entrenamiento.
+     * @param entrenamiento El entrenamiento del cual se actualizará el historial.
+     */
     fun actualizarHistorialMejoras(usuario: Usuario, entrenamiento: Entrenamiento) {
         when (entrenamiento) {
             is Ciclismo -> {
@@ -123,6 +171,11 @@ class GestorInfoEntrenamiento: GestorInformacion {
         }
     }
 
+    /**
+     * Función para comparar las mejoras del usuario después de un entrenamiento.
+     * @param usuario El usuario que realizó el entrenamiento.
+     * @param entrenamiento El entrenamiento del cual se compararán las mejoras.
+     */
     fun compararMejoras(usuario: Usuario, entrenamiento: Entrenamiento) {
         when (entrenamiento) {
             is Ciclismo -> {
@@ -148,21 +201,13 @@ class GestorInfoEntrenamiento: GestorInformacion {
                         Consola.enviar("Has mejorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
                         Consola.enviar(
-                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${
-                                entrenamiento.formatoRitmo(
-                                    entrenamiento.calcularRitmo()
-                                )
-                            } min/km\n"
+                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km\n"
                         )
                     } else {
                         Consola.enviar("Has empeorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
                         Consola.enviar(
-                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${
-                                entrenamiento.formatoRitmo(
-                                    entrenamiento.calcularRitmo()
-                                )
-                            } min/km\n"
+                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km\n"
                         )
                     }
                 }
@@ -175,28 +220,19 @@ class GestorInfoEntrenamiento: GestorInformacion {
                         Consola.enviar("Has mejorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
                         Consola.enviar(
-                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${
-                                entrenamiento.formatoRitmo(
-                                    entrenamiento.calcularRitmo()
-                                )
-                            } min/km\n"
+                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km\n"
                         )
                     } else {
                         Consola.enviar("Has empeorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
                         Consola.enviar(
-                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${
-                                entrenamiento.formatoRitmo(
-                                    entrenamiento.calcularRitmo()
-                                )
-                            } min/km\n"
+                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km\n"
                         )
                     }
                 }
             }
         }
     }
-
 }
 
 

@@ -5,14 +5,22 @@ import Usuario.TipoGenero
 import Usuario.Usuario
 import limpiarConsola
 
+/**
+ * Clase que gestiona el registro de usuarios y operaciones relacionadas con los usuarios.
+ * @property registroUsuarios Lista mutable de usuarios registrados.
+ */
 class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf()) {
 
-
-
     companion object {
+        // Almacena los nombres de los usuarios registrados para evitar duplicados.
         var registroNombresUsuarios = mutableSetOf<String>()
     }
 
+    /**
+     * Comprueba si el nombre de usuario ya existe en el registro.
+     * @param nombre El nombre de usuario a comprobar.
+     * @return true si el nombre de usuario ya existe, false de lo contrario.
+     */
     private fun comprobarUsuario(nombre: String): Boolean {
         val nombreAComprobar = nombre.trim()
         return if (registroNombresUsuarios.contains(nombreAComprobar)) {
@@ -23,11 +31,19 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         }
     }
 
+    /**
+     * Solicita al usuario ingresar su nombre.
+     * @return El nombre ingresado por el usuario.
+     */
     private fun pedirNombreUsuarioRegistrado(): String {
         Consola.enviar("Introduzca su nombre: ")
         return Consola.leerString().lowercase().trim()
     }
 
+    /**
+     * Solicita al usuario nuevo ingresar su nombre.
+     * @return El nombre ingresado por el usuario.
+     */
     private fun pedirNombreUsuarioNuevo(): String {
         var nombre = ""
         var continuar = true
@@ -47,6 +63,10 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         return nombre
     }
 
+    /**
+     * Solicita el género del usuario.
+     * @return TipoGenero El tipo de sexo del usuario.
+     */
     private fun pedirGenero(): TipoGenero {
         var genero: TipoGenero = TipoGenero.MUJER
         var sexo: String
@@ -69,6 +89,10 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         return genero
     }
 
+    /**
+     * Solicita la edad del usuario
+     * @return edad Un número entero que corresponde a la edad.
+     */
     private fun pedirEdad(): Int {
         var continuar = true
         var edad = 0
@@ -84,6 +108,10 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         return edad
     }
 
+    /**
+     * Solicita la altura en centímetros al usuario.
+     * @return altura Un número entero que corresponde a la altura.
+     */
     private fun pedirAltura(): Int {
 
         var continuar = true
@@ -100,6 +128,10 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         return altura
     }
 
+    /**
+     * Solicita el peso en kilogramos al usuario.
+     * @return peso Un número con decimales que corresponde al peso.
+     */
     private fun pedirPeso(): Double {
         var continuar = true
         var altura = 0.0
@@ -115,6 +147,10 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         return altura
     }
 
+    /**
+     * Solicita la contraseña al usuario.
+     * @return pass Un número entero que corresponde a la contraseña.
+     */
     private fun pedirPassword(): Int {
         var continuar = true
         var pass = 0
@@ -134,6 +170,10 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         return pass
     }
 
+    /**
+     * Solicita la contraseña dos veces.
+     * @return pass1 La contraseña si son iguales.
+     */
     private fun pedirPasswordNueva(): Int {
         var continuar = true
         var pass1 = 0
@@ -176,7 +216,10 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         return pass1
     }
 
-
+    /**
+     * Realiza el proceso de inicio de sesión del usuario.
+     * @return El usuario que ha iniciado sesión, o null si no se encontró ningún usuario.
+     */
     fun loginUsuario(): Usuario? {
         limpiarConsola()
         println("* Login *")
@@ -190,6 +233,10 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         return null
     }
 
+    /**
+     * Registra un nuevo usuario.
+     * @return El usuario registrado.
+     */
     fun registrarUsuario(): Usuario {
         limpiarConsola()
         println("* NUEVO USUARIO *")
@@ -204,10 +251,19 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         return user
     }
 
+    /**
+     * Busca un usuario registrado por su nombre y contraseña.
+     * @param nombre El nombre de usuario a buscar.
+     * @param pass La contraseña del usuario a buscar.
+     * @return El usuario encontrado, o null si no se encontró ningún usuario con los datos proporcionados.
+     */
     fun buscarUsuario(nombre: String, pass: Int): Usuario? {
         return registroUsuarios.find { it.nombre == nombre && it.password == pass }
     }
 
+    /**
+     * Elimina un usuario registrado.
+     */
     fun eliminarUsuario() {
         val usuarioEliminar = buscarUsuario(pedirNombreUsuarioRegistrado(), pedirPassword())
         if (usuarioEliminar != null) {

@@ -6,7 +6,18 @@ import Gestores.GestorInfoEntrenamiento
 import Gestores.RegistroUsuario
 import Usuario.Usuario
 
+
+/**
+ * Clase que controla los diferentes menús y opciones del programa.
+ */
 class ControlMenu {
+
+    /**
+     * Muestra el menú de acceso y gestiona las opciones seleccionadas.
+     *
+     * @param registroUsuario El registro de usuarios utilizado para el inicio de sesión y el registro de nuevos usuarios.
+     * @return El usuario que ha iniciado sesión o null si se selecciona la opción de salir.
+     */
     fun menuAcceso(registroUsuario: RegistroUsuario): Usuario? {
         var opcion: Int
         do {
@@ -31,7 +42,12 @@ class ControlMenu {
         return null
     }
 
-
+    /**
+     * Muestra el menú de historiales y gestiona las opciones seleccionadas.
+     *
+     * @param usuario El usuario para el cual se muestran los historiales.
+     * @param gestorInfoEntrenamiento El gestor de información de entrenamiento utilizado para mostrar los historiales.
+     */
     private fun menuHistorial(usuario: Usuario, gestorInfoEntrenamiento: GestorInfoEntrenamiento) {
         var opcion: Int
         do {
@@ -53,6 +69,13 @@ class ControlMenu {
         } while (opcion != 5)
     }
 
+    /**
+     * Muestra el menú de entrenamiento y gestiona las opciones seleccionadas.
+     *
+     * @param usuario El usuario para el cual se realiza el entrenamiento.
+     * @param gestorInfoEntrenamiento El gestor de información de entrenamiento utilizado para registrar los entrenamientos.
+     * @param gestorEntrenamiento El gestor de entrenamiento utilizado para solicitar datos de entrenamiento.
+     */
     private fun menuEntrenamiento(usuario: Usuario, gestorInfoEntrenamiento: GestorInfoEntrenamiento, gestorEntrenamiento: GestorEntrenamiento) {
         var opcion: Int
         do {
@@ -96,10 +119,18 @@ class ControlMenu {
         } while (opcion != 4)
     }
 
+    /**
+     * Muestra el menú principal y gestiona las opciones seleccionadas.
+     *
+     * @param usuario El usuario para el cual se muestra el menú principal.
+     * @param gestorInfoEntrenamiento El gestor de información de entrenamiento utilizado para mostrar información de usuario.
+     * @param registroUsuario El registro de usuarios utilizado para eliminar usuarios.
+     * @param gestorEntrenamiento El gestor de entrenamiento utilizado para realizar entrenamientos.
+     */
     fun menuPrincipal(usuario: Usuario, gestorInfoEntrenamiento: GestorInfoEntrenamiento, registroUsuario: RegistroUsuario, gestorEntrenamiento: GestorEntrenamiento) {
         var opcion: Int
         do {
-            Consola.enviar("Hola ${usuario.nombre}\n")
+            Consola.enviar("\nHola ${usuario.nombre}\n")
             Consola.menuPrincipal()
             opcion = Consola.leerEntero()
 
@@ -114,6 +145,14 @@ class ControlMenu {
         } while (opcion != 5)
     }
 
+    /**
+     * Controla los diferentes menús del programa.
+     *
+     * @param registroUsuario El registro de usuarios utilizado para el inicio de sesión y el registro de nuevos usuarios.
+     * @param gestorEntrenamiento El gestor de entrenamiento utilizado para realizar entrenamientos.
+     * @param gestorInfoEntrenamiento El gestor de información de entrenamiento utilizado para mostrar información de usuario y registros de entrenamiento.
+     * @return El usuario que ha iniciado sesión o null si se selecciona la opción de salir.
+     */
     fun controlMenus(registroUsuario: RegistroUsuario, gestorEntrenamiento: GestorEntrenamiento, gestorInfoEntrenamiento: GestorInfoEntrenamiento): Usuario? {
         var continuar = true
         do {
