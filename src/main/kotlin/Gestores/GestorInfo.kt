@@ -1,3 +1,13 @@
+package Gestores
+
+import Consola.Consola
+import Entrenamiento.Ciclismo
+import Entrenamiento.Entrenamiento
+import Entrenamiento.Natacion
+import Entrenamiento.Running
+import Pila.Pila
+import Usuario.Usuario
+import limpiarConsola
 
 interface GestorInformacion {
     var historial: MutableMap<String, MutableMap<String, String>>
@@ -55,32 +65,32 @@ class GestorInfoEntrenamiento: GestorInformacion {
 
     fun registrarEntrenamiento(usuario: Usuario, entrenamiento: Entrenamiento) {
         when (entrenamiento) {
-            is Ciclismo -> historial[usuario.nombre] = mutableMapOf("Ciclismo" to entrenamiento.toString())
-            is Running -> historial[usuario.nombre] = mutableMapOf("Running" to entrenamiento.toString())
+            is Ciclismo -> historial[usuario.nombre] = mutableMapOf("Entrenamiento.Ciclismo" to entrenamiento.toString())
+            is Running -> historial[usuario.nombre] = mutableMapOf("Entrenamiento.Running" to entrenamiento.toString())
             is Natacion -> historial[usuario.nombre] = mutableMapOf("Natación" to entrenamiento.toString())
         }
     }
 
     fun mostrarHistorialRunning(usuario: Usuario) {
-        val entrenamientosRunning = (historial[usuario.nombre]?.filterKeys { it == "Running" }?.values)
+        val entrenamientosRunning = (historial[usuario.nombre]?.filterKeys { it == "Entrenamiento.Running" }?.values)
 
-        Consola.enviar("\n* Running *\n")
+        Consola.enviar("\n* Entrenamiento.Running *\n")
         if (entrenamientosRunning != null) {
             entrenamientosRunning.forEach { Consola.enviar("$it\n") }
         } else {
-            Consola.enviar("No se encontraron entrenamientos de Running.\n")
+            Consola.enviar("No se encontraron entrenamientos de Entrenamiento.Running.\n")
         }
     }
 
     fun mostrarHistorialCiclismo(usuario: Usuario) {
         limpiarConsola()
-        val entrenamientosCiclismo = historial[usuario.nombre]?.filterKeys { it == "Ciclismo" }?.values
+        val entrenamientosCiclismo = historial[usuario.nombre]?.filterKeys { it == "Entrenamiento.Ciclismo" }?.values
 
-        Consola.enviar("\n* Ciclismo *\n")
+        Consola.enviar("\n* Entrenamiento.Ciclismo *\n")
         if (entrenamientosCiclismo != null) {
             entrenamientosCiclismo.forEach { Consola.enviar("$it\n") }
         } else {
-            Consola.enviar("No se encontraron entrenamientos de Ciclismo.\n")
+            Consola.enviar("No se encontraron entrenamientos de Entrenamiento.Ciclismo.\n")
         }
     }
 
@@ -137,11 +147,23 @@ class GestorInfoEntrenamiento: GestorInformacion {
                     if (ultimoRegistro > entrenamiento.calcularRitmo()) {
                         Consola.enviar("Has mejorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
-                        Consola.enviar("   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km\n")
+                        Consola.enviar(
+                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${
+                                entrenamiento.formatoRitmo(
+                                    entrenamiento.calcularRitmo()
+                                )
+                            } min/km\n"
+                        )
                     } else {
                         Consola.enviar("Has empeorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
-                        Consola.enviar("   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km\n")
+                        Consola.enviar(
+                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${
+                                entrenamiento.formatoRitmo(
+                                    entrenamiento.calcularRitmo()
+                                )
+                            } min/km\n"
+                        )
                     }
                 }
             }
@@ -152,11 +174,23 @@ class GestorInfoEntrenamiento: GestorInformacion {
                     if (ultimoRegistro > entrenamiento.calcularRitmo()) {
                         Consola.enviar("Has mejorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
-                        Consola.enviar("   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km\n")
+                        Consola.enviar(
+                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${
+                                entrenamiento.formatoRitmo(
+                                    entrenamiento.calcularRitmo()
+                                )
+                            } min/km\n"
+                        )
                     } else {
                         Consola.enviar("Has empeorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
-                        Consola.enviar("   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km\n")
+                        Consola.enviar(
+                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${
+                                entrenamiento.formatoRitmo(
+                                    entrenamiento.calcularRitmo()
+                                )
+                            } min/km\n"
+                        )
                     }
                 }
             }

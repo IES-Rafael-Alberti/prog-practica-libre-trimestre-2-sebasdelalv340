@@ -1,3 +1,8 @@
+import ControlMenus.ControlMenu
+import Gestores.GestorEntrenamiento
+import Gestores.GestorInfoEntrenamiento
+import Gestores.RegistroUsuario
+
 fun limpiarConsola() {
     for (i in 1..100) {
         println()

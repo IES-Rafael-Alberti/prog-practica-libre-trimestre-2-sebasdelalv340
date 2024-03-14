@@ -1,6 +1,13 @@
-class RegistroUsuario {
+package Gestores
 
-    private var registroUsuarios = mutableListOf<Usuario>()
+import Consola.Consola
+import Usuario.TipoGenero
+import Usuario.Usuario
+import limpiarConsola
+
+class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf()) {
+
+
 
     companion object {
         var registroNombresUsuarios = mutableSetOf<String>()
@@ -197,7 +204,7 @@ class RegistroUsuario {
         return user
     }
 
-    private fun buscarUsuario(nombre: String, pass: Int): Usuario? {
+    fun buscarUsuario(nombre: String, pass: Int): Usuario? {
         return registroUsuarios.find { it.nombre == nombre && it.password == pass }
     }
 

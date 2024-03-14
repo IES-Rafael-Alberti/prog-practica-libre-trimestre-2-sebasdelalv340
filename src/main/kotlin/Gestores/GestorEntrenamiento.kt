@@ -1,3 +1,12 @@
+package Gestores
+
+import Consola.Consola
+import Entrenamiento.Ciclismo
+import Entrenamiento.Entrenamiento
+import Entrenamiento.Natacion
+import Entrenamiento.Running
+import Usuario.Usuario
+
 class GestorEntrenamiento {
 
     fun pedirRegistro(): Boolean {

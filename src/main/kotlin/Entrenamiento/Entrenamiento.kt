@@ -1,9 +1,17 @@
+package Entrenamiento
+
+import Usuario.TipoGenero
+import Usuario.Usuario
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
 fun Double.redondear(posiciones: Int): Double {
     val factor = 10.0.pow(posiciones)
     return (this * factor).roundToInt() / factor
+}
+
+fun Double.redondear(): Double {
+    return (this * 100).toInt().toDouble() / 100
 }
 
 
@@ -27,24 +35,24 @@ abstract class Entrenamiento(private val km: Int, private val metros: Int, val h
     }
 
     fun calcularTiempo(): Double {
-        return (horas * TIEMPO) + minutos + (segundos / TIEMPO).toDouble() //Devuelve el tiempo en minutos
+        return (horas * TIEMPO) + minutos + (segundos / TIEMPO).toDouble()
     }
 
     fun calcularDistancia(): Double {
-        return km + (metros / KM).toDouble() //Devuelve la distancia en km
+        return km + (metros / KM).toDouble()
     }
 
     fun calcularRitmo(): Double {
-        return calcularTiempo() / calcularDistancia() //Devuelve el ritmo en min/km
+        return calcularTiempo() / calcularDistancia()
     }
 
-    fun formatoRitmo(tiempoEnMinutos: Double): String { // Transforma el ritmo en string 'minutos:segundos'
+    fun formatoRitmo(tiempoEnMinutos: Double): String {
         val minutos = tiempoEnMinutos.toInt()
         val segundos = ((tiempoEnMinutos - minutos) * TIEMPO).toInt()
         return "$minutos:$segundos"
     }
 
-    fun calcularCalorias(usuario: Usuario): Double { //Devuelve kcal
+    fun calcularCalorias(usuario: Usuario): Double {
         if (usuario.genero.sexo == TipoGenero.HOMBRE.sexo) {
             val metabolismoBasal = MB_HOMBRES + (MB_PESO_HOMBRES * usuario.peso) + (MB_ALTURA_HOMBRE * usuario.altura) + (MB_EDAD_HOMBRE * usuario.edad)
             return ((metabolismoBasal * MET) / HORAS_DIA) * (calcularTiempo() / TIEMPO)
@@ -56,7 +64,7 @@ abstract class Entrenamiento(private val km: Int, private val metros: Int, val h
     }
 
     override fun toString(): String {
-        return "Entrenamiento(Tiempo total: ${calcularTiempo()}, distancia: ${calcularDistancia()}, ritmo: ${calcularRitmo()} y calorias quemadas: $caloriasQuemadas kcal)."
+        return "Entrenamiento(Tiempo total: ${calcularTiempo()}, distancia: ${calcularDistancia()}, ritmo: ${calcularRitmo()} y calorias quemadas: ${caloriasQuemadas.redondear(2)} kcal)."
     }
 }
 

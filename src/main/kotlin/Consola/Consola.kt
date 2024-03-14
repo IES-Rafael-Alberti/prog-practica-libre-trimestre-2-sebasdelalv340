@@ -1,3 +1,5 @@
+package Consola
+
 interface Notificador {
     fun enviar(mensaje: String) {
     }

@@ -1,3 +1,11 @@
+package ControlMenus
+
+import Consola.Consola
+import Gestores.GestorEntrenamiento
+import Gestores.GestorInfoEntrenamiento
+import Gestores.RegistroUsuario
+import Usuario.Usuario
+
 class ControlMenu {
     fun menuAcceso(registroUsuario: RegistroUsuario): Usuario? {
         var opcion: Int

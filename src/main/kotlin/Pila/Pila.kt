@@ -1,3 +1,5 @@
+package Pila
+
 /**
  * Una clase genérica que representa una pila (stack) de elementos.
  * Puede contener elementos de cualquier tipo.
