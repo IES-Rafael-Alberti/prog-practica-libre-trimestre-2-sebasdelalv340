@@ -64,14 +64,6 @@ La actividad consiste en el desarrollo de un proyecto software en Kotlin, permit
 
 Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre cómo has aplicado los criterios de evaluación en tu proyecto. Al responderlas, **asegúrate de hacer referencia y enlazar al código relevante** en tu `README.md`, facilitando así la evaluación de tu trabajo.
 
-#### **Criterio global 1: Instancia objetos y hacer uso de ellos**
-- **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? Proporciona ejemplos específicos de tu código.
-
-Los objetos instanciados en el funcionamiento principal son los relativos a las clases que se encargan de la gestión, registro, input/output de datos, así como el menu de usuario.
-
-Los objetos relativos a los datos en sí (usuario y entrenamientos) se instancian dentro de los métodos de las clases anteriormente mencionadas, puesto que sus propiedades son introducidas por consola por el usuario.
-
-
 
 #### **Criterio global 1: Instancia objetos y hacer uso de ellos**
 - **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? Proporciona ejemplos específicos de tu código.
