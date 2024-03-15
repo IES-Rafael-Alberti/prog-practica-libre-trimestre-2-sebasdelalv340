@@ -103,9 +103,10 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelal
 
 Para el desarrollo del presente proyecto se ha utilizado IntelliJ y la base en Gradle como sistema constructor.
 
-Una de las grandes utilidades es la guía permanente que realiza el IDE mientras desarrollas tu código. Siempre te va mostrando errores de sintaxis, errores de implementación de herencias, sugerencias sobre las clases, sus propiedades o métodos. Como por ejemplo, cuando te sugiere cambiar alguna propiedad o método a privado si solo está siendo usado dentro de la clase.
+Una de las grandes utilidades es la guía permanente que realiza el IDE mientras desarrollas tu código. Siempre te va mostrando errores de sintaxis, errores de implementación de herencias, sugerencias sobre las clases, sus propiedades o métodos.
+Por ejemplo, cuando te sugiere cambiar alguna propiedad o método a privado si solo está siendo usado dentro de la clase.
 
-También, el IDE junto con Github, para almacenar en un repositorio los avances del proyecto, ha permitido guardar diferentes versiones del proyecto a medida que avanzaba en su desarrollo. Al respecto, el IDE facilita mucho la tarea pues nos permite gestionar estos avances sin necesidad de usar la terminal. Si se ha notado, respecto a otros sistemas constructores, que Gradle es más lento a la hora de compilar.
+También, el IDE junto con Github, para almacenar en un repositorio los avances del proyecto, ha permitido guardar diferentes versiones del proyecto a medida que avanzaba en su desarrollo. El IDE facilita mucho la tarea pues nos permite gestionar estos avances sin necesidad de usar la terminal. Si se ha notado, respecto a otros sistemas constructores, que Gradle es más lento a la hora de compilar.
 
 Otro punto que aporta el IDE es la depuración de código mediante el debuger. Insertando puntos de ruptura en las líneas de código donde creemos que puede estar el problema por el cual el resultado obtenido no es el esperado.
 
@@ -167,8 +168,8 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelal
 
 La clase **GestorInfoEntrenamiento** se encarga de gestionar la información relativa a los diferentes tipos de entrenamientos e implementa la interfaz **GestorInformación** que contiene una mapa para almacenar un historial por cada usuario y para cada usuario un mapa con el historial de cada entrenamiento **'MutableMap<String, MutableMap<String, String>>'**.
 
-La idea principal era crear dos interfaces, una para gestionar la información del usuario y otra para la información de los entrenamientos, pero la función destinaada al usuario era tan reducida que se incluyó las dos en la misma interfaz, por lo que la clase **GestorInfoEntrenamiento** contiene un método que muestra la información relativa al usuario.
-Incumplimos lso principios de responsabilidad única y segregación de interfaces pero con conocimiento de ello.
+La idea principal era crear dos interfaces, una para gestionar la información del usuario y otra para la información de los entrenamientos, pero la función destinada al usuario era tan reducida que se incluyó las dos en la misma interfaz, por lo que la clase **GestorInfoEntrenamiento** contiene un método que muestra la información relativa al usuario.
+Incumplimos los principios de responsabilidad única y segregación de interfaces pero con conocimiento de ello.
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/9419710aa22bd407aa2674b217e939aa228fd963/src/main/kotlin/Gestores/GestorInfo.kt#L12-L34
 
@@ -186,9 +187,10 @@ El proyecto dispone de varias clases que se encargan de la gestión de los datos
 
 Como la clase **Usuario** es una data class, no realizamos ninguna herencia, pero es lo que buscamos porque el usuario solo va a almacenar sus datos.
 
-En la clase **Entrenamiento vemos una especialización respecto a sus subclases **Running**, **Ciclismo** y **Natacion**, ya que representan una más específica de su clase base. Además de heredar las propiedades y métodos de su clase base introducen otras características como el cálculo de vatios en **Ciclismo y del número de brazadas en **Natacion**.
+En la clase **Entrenamiento vemos una especialización respecto a sus subclases **Running**, **Ciclismo** y **Natacion**, ya que representan una más específica de su clase base.
+Además de heredar las propiedades y métodos de su clase base introducen otras características como el cálculo de vatios en **Ciclismo y del número de brazadas en **Natacion**.
 
-Por último, se ha creado una clase genérica **Pila**, de la que se hablará más detenidamente en el 'Criterio 9', que no cumple exactamente con una herencia de construcción porque no hereda de otra clase génerica, sino que se usa en listas que se instancian como **Pila.
+Por último, se ha creado una clase genérica **Pila**, de la que se hablará más detenidamente en el 'Criterio 9', que no cumple exactamente con una herencia de construcción porque no hereda de otra clase génerica, sino que se usa en listas que se instancian como **Pila**.
 
 
 #### **Criterio global 7: Librerías de clases**
@@ -224,7 +226,8 @@ Como ya se ha comentado anteriormente, se ha implementado un genérico en la cla
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/Pila/Pila.kt#L8-L50
 
-La idea de su creación recae sobre la necesidad de tener registros inteligentes, es decir, tener listas de ciertos datos que queremos registrar y almacenar, y las listas por si solas sean capaces de añadir, eleminar, devolver el último elemento incorporado o retornar si está vacía. De ahí que sean una pila o 'stack'.
+La idea de su creación recae sobre la necesidad de tener registros inteligentes, es decir, tener listas de ciertos datos que queremos registrar y almacenar, y las listas por si solas sean capaces de añadir, eleminar, devolver el último elemento incorporado o retornar si está vacía.
+De ahí que sean una pila o 'stack'.
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/Gestores/GestorInfo.kt#L34-L43
 
