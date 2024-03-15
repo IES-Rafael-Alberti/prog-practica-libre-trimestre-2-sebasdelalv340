@@ -139,6 +139,8 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelal
 
 Como se ha podido ver en algún estracto de código anterior, la clase **Entrenamiento** es abstracta, ya que las clases que heredan de ellan deben implementar sus propiedades y métodos, aunque luego a las subclases se les extienda su funcionalidad.
 
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/84203acd8ad50fae0367fd5eca67d68415a34830/src/main/kotlin/Entrenamiento/Entrenamiento.kt#L25-L31
+
 **En cuanto a interfaces:**
 
 La clase **GestorInfoEntrenamiento** se encarga de gestionar la información relativa a los diferentes tipos de entrenamientos e implementa la interfaz **GestorInformación** que contiene una mapa para almacenar un historial por cada usuario y para cada usuario un mapa con el historial de cada entrenamiento **'MutableMap<String, MutableMap<String, String>>'**.
@@ -152,7 +154,7 @@ Un ejemplo de todo lo contrario es el objeto **Consola, que se encarga de input/
 
 Aquí creamos dos interfaces **Notificador** y **EntradaDatos** e implementamos ambas en el objeto **Consola**. Esto nos permite dividir la funcionalidad y si quisieramos, crear dos consolas diferentes, una para los inputs y otra para los ouputs.
 
-https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/9419710aa22bd407aa2674b217e939aa228fd963/src/main/kotlin/Gestores/GestorInfo.kt#L12-L34
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/84203acd8ad50fae0367fd5eca67d68415a34830/src/main/kotlin/Consola/Consola.kt#L6-L25
 
 
 #### **Criterio global 6: Diseño de jerarquía de clases**
