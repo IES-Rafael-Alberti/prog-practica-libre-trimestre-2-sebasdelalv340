@@ -90,7 +90,7 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelal
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?
 
-  Se ha definido diversas propiedades estáticas, declaradas como constantes, puesto que ciertas clases necesitan realizar cálculos matemáticos y el uso de estas constantes facilita la tarea para no repetir mucho código, y en el caso de necesitar modificar esos datos solo realizar dicha modificación en un único lugar.
+Se ha definido diversas propiedades estáticas, declaradas como constantes, puesto que ciertas clases necesitan realizar cálculos matemáticos y el uso de estas constantes facilita la tarea para no repetir mucho código, y en el caso de necesitar modificar esos datos solo realizar dicha modificación en un único lugar.
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/9419710aa22bd407aa2674b217e939aa228fd963/src/main/kotlin/Entrenamiento/Entrenamiento.kt#L35-L49
 
@@ -113,17 +113,28 @@ Las pruebas del programas se realizan mediante pruebas unitarias a través de JU
 #### **Criterio global 4: Definir clases y su contenido**
 - **(4.b, 4.c, 4.d, 4.g)**: Explica sobre un ejemplo de tu código, cómo definiste las clases en tu proyecto, es decir como identificaste las de propiedades, métodos y constructores y modificadores del control de acceso a métodos y propiedades, para representar al objeto del mundo real. ¿Cómo contribuyen estas clases a la solución del problema que tu aplicación aborda?
 
-**Expondré dos ejemplos:**
+Tenemos una **data class Usuario**. Solo almacena lso datos relativos al usuario.
 
-El primero es la clase **Ciclismo** que hereda de la clase **Entrenamiento**, en la que además de contar con las propiedades de su superclase, hemos añadido la propiedad **vatios**, que la usaremos para comparar nuestras sesiones en bici.
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/Usuario/Usuario.kt#L23-L30
+
+También una **enum class TipoGenero**. Utilizada para determinar si el usuario es hombre o mujer.
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/Usuario/Usuario.kt#L3-L10
+
+Una clase abstracta **Entrenamiento**. Define unas propiedades y métodos que son comúnes para sus subclases **Ciclismo**, **Running** y **Natacion**.
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/Entrenamiento/Entrenamiento.kt#L25-L33
+
+Aquí vemos el ejemplo de la clase **Ciclismo** que hereda de la clase **Entrenamiento**, en la que además de contar con las propiedades de su superclase, hemos añadido la propiedad **vatios**, que la usaremos para comparar nuestras sesiones en bici.
 
 Como se puede ver en el ejemplo, esta clase tiene todas sus propiedades abiertas, excepto **vatios** que solo es relativa a esta clase en concreto, y los métodos también están abiertos puesto que se llaman desde otras clases y necesitamos mantenerlos así.
 
 Tanto esta clase como el resto que heredan de **Entrenamiento** nos permiten diferenciar entre los tipos de entrenamiento lo que nos facilita su gestión en otras clases.
+Las clases **Running** y **Natacion** son basante parecidas, por lo que no tiene interés mostrarlas todas.
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/0ad90277ceb1c7c1f675f141e498ac1b49eeed5f/src/main/kotlin/Entrenamiento/Ciclismo.kt#L15-L63
 
-El segundo es la clase **RegistroUsuario**, que se encarga de registrar los usuarios nuevos, permitir el acceso a usuarios ya registrados y eliminar usuarios.
+Otra clase es **RegistroUsuario**, que se encarga de registrar los usuarios nuevos, permitir el acceso a usuarios ya registrados y eliminar usuarios.
 
 Las propiedades que contiene esta clase es una lista que contiene el registro de los distintos usuarios y otra propiedad estática que mantiene un registro de los nombres usados por los usuarios e impide que un usuario se registre con un nombre ya existente.
 
@@ -132,6 +143,11 @@ La mayoría de sus métodos son privados, ya que su uso es exclusivo de su clase
 Los métodos **registrarUsuario** y **eliminarUsuario** no son privados puesto que se llaman desde otra clase, pero los datos que reciben son retornados por las propiedades y el resto de métodos privados de la clase que si son privados, lo que mantiene la funcionalidad cerrada.
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/9419710aa22bd407aa2674b217e939aa228fd963/src/main/kotlin/Gestores/RegistroUsuario.kt#L11-L273
+
+Otras clases son **GestorEntrenamiento** que gestiona las instancias de entrenamientos y lo relativos a los mismos; **GestorInformacion** que gestiona toda la información almacenada en los historiales; y una clase **ControlMenu** que gestiona el menu de usuario.
+Aquí vemos un ejemplo de este último.
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/ControlMenus/ControlMenu.kt#L13-L168
 
 
 #### **Criterio global 5: Herencia y uso de clases abstractas e interfaces**
@@ -150,7 +166,7 @@ Incumplimos lso principios de responsabilidad única y segregación de interface
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/9419710aa22bd407aa2674b217e939aa228fd963/src/main/kotlin/Gestores/GestorInfo.kt#L12-L34
 
-Un ejemplo de todo lo contrario es el objeto **Consola, que se encarga de input/ouput de datos por consola. La idea de que sea un objeto es para que pueda ser usada en cualquier parte del programa sin necesidad de ser intanciada y no queremos crear ningún objeto a partir de ella.
+Un ejemplo de todo lo contrario es el objeto **Consola**, que se encarga de input/ouput de datos por consola. La idea de que sea un objeto es para que pueda ser usada en cualquier parte del programa sin necesidad de ser intanciada y no queremos crear ningún objeto a partir de ella.
 
 Aquí creamos dos interfaces **Notificador** y **EntradaDatos** e implementamos ambas en el objeto **Consola**. Esto nos permite dividir la funcionalidad y si quisieramos, crear dos consolas diferentes, una para los inputs y otra para los ouputs.
 
@@ -181,8 +197,31 @@ En algún momento existió la incorporación de una librería para limpiar la co
 #### **Criterio global 8: Documentado**
 - **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. ¿Que herramientas has utilizado? ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?
 
-El lenguaje utilizado para la documentación del proyecto es **KDoc**
+El lenguaje utilizado para la documentación del proyecto es **KDoc**.
+
+Este es un ejemplo de comentario para ofrecer una idea de la utilidad del código, ya que ver todas estas constantes puede ser raro.
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/Entrenamiento/Entrenamiento.kt#L35-L48
+
+A continuación, vemos un ejemplo de documentación de una clase y sus propiedades. Nos sirve para saber que significa cada propiedad y el valor que contiene.
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/Usuario/Usuario.kt#L13-L30
+
+El siguiente código representa la documentación de un método. Nos dice cuál es su función, que parámetros recibe y lo que retorna. Esta información nos ayuda a comprender rápidamente su funcionamiento.
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/Gestores/RegistroUsuario.kt#L18-L31
 
 #### **Criterio global 9: Genéricos**
 - **(6.f)**: Muestra ejemplos de tu código sobre cómo has implementado una clase con genéricos. ¿Qué beneficio has obtenido?
 
+Como ya se ha comentado anteriormente, se ha implementado un genérico en la clase **Pila**.
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/Pila/Pila.kt#L8-L50
+
+La idea de su creación recae sobre la necesidad de tener registros inteligentes, es decir, tener listas de ciertos datos que queremos registrar y almacenar, y las listas por si solas sean capaces de añadir, eleminar, devolver el último elemento incorporado o retornar si está vacía. De ahí que sean una pila o 'stack'.
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/Gestores/GestorInfo.kt#L34-L43
+
+Su implementación en los registros permite saber, dentro de la dinámica del proyecto, si el usuario ha mejorado su rendimiento o si en caso contrario a empeorado.
+
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/Gestores/GestorInfo.kt#L178-L239
