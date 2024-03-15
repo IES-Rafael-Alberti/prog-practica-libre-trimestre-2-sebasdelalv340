@@ -121,7 +121,7 @@ Como se puede ver en el ejemplo, esta clase tiene todas sus propiedades abiertas
 
 Tanto esta clase como el resto que heredan de **Entrenamiento** nos permiten diferenciar entre los tipos de entrenamiento lo que nos facilita su gestión en otras clases.
 
-https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/84203acd8ad50fae0367fd5eca67d68415a34830/src/main/kotlin/Entrenamiento/Entrenamiento.kt#L25-L31
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/0ad90277ceb1c7c1f675f141e498ac1b49eeed5f/src/main/kotlin/Entrenamiento/Ciclismo.kt#L15-L63
 
 El segundo es la clase **RegistroUsuario**, que se encarga de registrar los usuarios nuevos, permitir el acceso a usuarios ya registrados y eliminar usuarios.
 
