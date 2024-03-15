@@ -115,13 +115,13 @@ Las pruebas del programas se realizan mediante pruebas unitarias a través de JU
 
 **Expondré dos ejemplos:**
 
-El primero es la clase **Ciclismo** que hereda de la clase **Entrenamiento**, en la que además de contar con las propiedades de su superclase, hemos añadido la propiedad **vatios, que la usaremos para comparar nuestras sesiones en bici.
+El primero es la clase **Ciclismo** que hereda de la clase **Entrenamiento**, en la que además de contar con las propiedades de su superclase, hemos añadido la propiedad **vatios**, que la usaremos para comparar nuestras sesiones en bici.
 
 Como se puede ver en el ejemplo, esta clase tiene todas sus propiedades abiertas, excepto **vatios** que solo es relativa a esta clase en concreto, y los métodos también están abiertos puesto que se llaman desde otras clases y necesitamos mantenerlos así.
 
 Tanto esta clase como el resto que heredan de **Entrenamiento** nos permiten diferenciar entre los tipos de entrenamiento lo que nos facilita su gestión en otras clases.
 
-https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/9419710aa22bd407aa2674b217e939aa228fd963/src/main/kotlin/Entrenamiento/Entrenamiento.kt#L25-L115
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/84203acd8ad50fae0367fd5eca67d68415a34830/src/main/kotlin/Entrenamiento/Entrenamiento.kt#L25-L31
 
 El segundo es la clase **RegistroUsuario**, que se encarga de registrar los usuarios nuevos, permitir el acceso a usuarios ya registrados y eliminar usuarios.
 
