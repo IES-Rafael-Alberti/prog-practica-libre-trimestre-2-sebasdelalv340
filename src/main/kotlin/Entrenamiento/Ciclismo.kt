@@ -33,7 +33,7 @@ class Ciclismo(km: Int,
      * @return La velocidad media del entrenamiento en km/h.
      */
     fun calcularVelocidadMedia(): Double {
-        return calcularDistancia() / (calcularTiempo() / Entrenamiento.Companion.TIEMPO)
+        return (calcularDistancia() / (calcularTiempo() / TIEMPO)).redondear()
     }
 
     /**
@@ -48,7 +48,7 @@ class Ciclismo(km: Int,
         val fuerza = usuario.peso * ACELERACION_GRAVITATORIA
         val trabajo = fuerza * distancia
         vatios = trabajo / tiempo
-        return vatios
+        return vatios.redondear()
     }
 
     /**

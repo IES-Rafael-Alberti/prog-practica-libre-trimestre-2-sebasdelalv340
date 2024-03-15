@@ -42,17 +42,13 @@ class GestorEntrenamiento {
      */
     fun pedirDatosCiclismo(usuario: Usuario): Entrenamiento {
         Consola.enviar("Introduce la distancia\n")
-        Consola.enviar("Kilómetros: ")
-        val km = pedirDistancia()
-        Consola.enviar("Metros: ")
-        val metros = pedirDistancia()
+        val km = pedirKilometros()
+        val metros = pedirMetros()
+
         Consola.enviar("Introduce el tiempo\n")
-        Consola.enviar("Horas: ")
-        val horas = pedirTiempo()
-        Consola.enviar("Minutos: ")
-        val minutos = pedirTiempo()
-        Consola.enviar("Segundos: ")
-        val segundos = pedirTiempo()
+        val horas = pedirHoras()
+        val minutos = pedirMinutos()
+        val segundos = pedirSegundos()
 
         return Ciclismo(km, metros, horas, minutos, segundos, usuario)
     }
@@ -65,17 +61,13 @@ class GestorEntrenamiento {
      */
     fun pedirDatosRunning(usuario: Usuario): Entrenamiento {
         Consola.enviar("Introduce la distancia\n")
-        Consola.enviar("Kilómetros: ")
-        val km = Consola.leerEntero()
-        Consola.enviar("Metros: ")
-        val metros = pedirDistancia()
+        val km = pedirKilometros()
+        val metros = pedirMetros()
+
         Consola.enviar("Introduce el tiempo\n")
-        Consola.enviar("Horas: ")
-        val horas = pedirTiempo()
-        Consola.enviar("Minutos: ")
-        val minutos = pedirTiempo()
-        Consola.enviar("Segundos: ")
-        val segundos = pedirTiempo()
+        val horas = pedirHoras()
+        val minutos = pedirMinutos()
+        val segundos = pedirSegundos()
 
         return Running(km, metros, horas, minutos, segundos, usuario)
     }
@@ -88,54 +80,112 @@ class GestorEntrenamiento {
      */
     fun pedirDatosNatacion(usuario: Usuario): Entrenamiento {
         Consola.enviar("Introduce la distancia\n")
-        Consola.enviar("Kilómetros: ")
-        val km = Consola.leerEntero()
-        Consola.enviar("Metros: ")
-        val metros = Consola.leerEntero()
+        val km = pedirKilometros()
+        val metros = pedirMetros()
+
         Consola.enviar("Introduce el tiempo\n")
-        Consola.enviar("Horas: ")
-        val horas = Consola.leerEntero()
-        Consola.enviar("Minutos: ")
-        val minutos = Consola.leerEntero()
-        Consola.enviar("Segundos: ")
-        val segundos = Consola.leerEntero()
+        val horas = pedirHoras()
+        val minutos = pedirMinutos()
+        val segundos = pedirSegundos()
 
         return Natacion(km, metros, horas, minutos, segundos, usuario)
     }
 
     /**
-     * Solicita al usuario la distancia de un entrenamiento.
+     * Solicita al usuario los kilómetros de un entrenamiento.
      *
-     * @return La distancia del entrenamiento.
+     * @return Los kilómetros del entrenamiento.
      */
-    private fun pedirDistancia(): Int {
+    private fun pedirKilometros(): Int {
         var continuar = true
         var km = 0
         do {
+            Consola.enviar("Kilómetros: ")
             try {
                 km = Consola.leerEntero()
                 continuar = false
             } catch (e: NumberFormatException) {
-                Consola.enviar("El número introducido no es una opción válida.")
+                Consola.enviar("El número introducido no es una opción válida.\n")
             }
         } while (continuar)
         return km
     }
 
     /**
-     * Solicita al usuario el tiempo de un entrenamiento.
+     * Solicita al usuario los metros de un entrenamiento.
      *
-     * @return El tiempo del entrenamiento.
+     * @return Los metros del entrenamiento.
      */
-    private fun pedirTiempo(): Int {
+    private fun pedirMetros(): Int {
+        var continuar = true
+        var km = 0
+        do {
+            Consola.enviar("Metros: ")
+            try {
+                km = Consola.leerEntero()
+                continuar = false
+            } catch (e: NumberFormatException) {
+                Consola.enviar("El número introducido no es una opción válida.\n")
+            }
+        } while (continuar)
+        return km
+    }
+
+    /**
+     * Solicita al usuario las horas de un entrenamiento.
+     *
+     * @return Las horas del entrenamiento.
+     */
+    private fun pedirHoras(): Int {
         var continuar = true
         var tiempo = 0
         do {
+            Consola.enviar("Horas: ")
             tiempo = Consola.leerEntero()
             if (tiempo in 0..59) {
                 continuar = false
             } else {
-                Consola.enviar("Por favor, introduce un valor entre 0 y 59")
+                Consola.enviar("Por favor, introduce un valor entre 0 y 59\n")
+            }
+        } while (continuar)
+        return tiempo
+    }
+
+    /**
+     * Solicita al usuario los minutos de un entrenamiento.
+     *
+     * @return Los minutos del entrenamiento.
+     */
+    private fun pedirMinutos(): Int {
+        var continuar = true
+        var tiempo = 0
+        do {
+            Consola.enviar("Minutos: ")
+            tiempo = Consola.leerEntero()
+            if (tiempo in 0..59) {
+                continuar = false
+            } else {
+                Consola.enviar("Por favor, introduce un valor entre 0 y 59\n")
+            }
+        } while (continuar)
+        return tiempo
+    }
+
+    /**
+     * Solicita al usuario los segundos de un entrenamiento.
+     *
+     * @return Los segundos del entrenamiento.
+     */
+    private fun pedirSegundos(): Int {
+        var continuar = true
+        var tiempo = 0
+        do {
+            Consola.enviar("Segundos: ")
+            tiempo = Consola.leerEntero()
+            if (tiempo in 0..59) {
+                continuar = false
+            } else {
+                Consola.enviar("Por favor, introduce un valor entre 0 y 59\n")
             }
         } while (continuar)
         return tiempo

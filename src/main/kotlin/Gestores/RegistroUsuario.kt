@@ -3,7 +3,6 @@ package Gestores
 import Consola.Consola
 import Usuario.TipoGenero
 import Usuario.Usuario
-import limpiarConsola
 
 /**
  * Clase que gestiona el registro de usuarios y operaciones relacionadas con los usuarios.
@@ -48,16 +47,16 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         var nombre = ""
         var continuar = true
         do {
-            print("Introduzca su nombre: ")
+            Consola.enviar("Introduzca su nombre: ")
             try {
                 nombre = readln().lowercase().trim()
                 if (comprobarUsuario(nombre)) {
-                    println("El nombre ya existe.")
+                    Consola.enviar("El nombre ya existe.\n")
                 } else {
                     continuar = false
                 }
             } catch (e: IllegalArgumentException) {
-                println("El número introducido no es una opción válida.")
+                Consola.enviar("El número introducido no es una opción válida.\n")
             }
         } while (continuar)
         return nombre
@@ -72,7 +71,7 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         var sexo: String
         var continuar = true
         do {
-            print("Sexo (H/M): ")
+            Consola.enviar("Sexo (H/M): ")
             try {
                 sexo = readln().uppercase()
                 if (sexo == "H") {
@@ -83,7 +82,7 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
                     continuar = false
                 }
             } catch (e: IllegalArgumentException) {
-                println("La entrada introducida no es una opción válida.")
+                Consola.enviar("La entrada introducida no es una opción válida.\n")
             }
         } while (continuar)
         return genero
@@ -97,12 +96,12 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         var continuar = true
         var edad = 0
         do {
-            print("Edad: ")
+            Consola.enviar("Edad: ")
             try {
                 edad = readln().toInt()
                 continuar = false
             } catch (e: NumberFormatException) {
-                println("El número introducido no es una opción válida.")
+                Consola.enviar("El número introducido no es una opción válida.\n")
             }
         } while (continuar)
         return edad
@@ -117,12 +116,12 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         var continuar = true
         var altura = 0
         do {
-            print("Altura (cm): ")
+            Consola.enviar("Altura (cm): ")
             try {
                 altura = readln().toInt()
                 continuar = false
             } catch (e: NumberFormatException) {
-                println("La entrada introducida no es una opción válida.")
+                Consola.enviar("La entrada introducida no es una opción válida.\n")
             }
         } while (continuar)
         return altura
@@ -136,12 +135,12 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         var continuar = true
         var altura = 0.0
         do {
-            print("Peso (kg): ")
+            Consola.enviar("Peso (kg): ")
             try {
                 altura = readln().toDouble()
                 continuar = false
             } catch (e: NumberFormatException) {
-                println("La entrada introducida no es una opción válida.")
+                Consola.enviar("La entrada introducida no es una opción válida.\n")
             }
         } while (continuar)
         return altura
@@ -155,16 +154,16 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         var continuar = true
         var pass = 0
         do {
-            print("Contraseña (6 dígitos): ")
+            Consola.enviar("Contraseña (6 dígitos): ")
             try {
                 pass = readln().toInt()
                 if (pass.toString().length != 6) {
-                    println("La contraseña debe tener 6 dígitos.")
+                    Consola.enviar("La contraseña debe tener 6 dígitos.\n")
                 } else {
                     continuar = false
                 }
             } catch (e: NumberFormatException) {
-                println("La entrada introducida no es una opción válida.")
+                Consola.enviar("La entrada introducida no es una opción válida.\n")
             }
         } while (continuar)
         return pass
@@ -180,30 +179,30 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         var pass2 = 0
         do {
             do {
-                print("Contraseña (6 dígitos): ")
+                Consola.enviar("Contraseña (6 dígitos): ")
                 try {
                     pass1 = readln().toInt()
                     if (pass1.toString().length != 6) {
-                        println("La contraseña debe tener 6 dígitos.")
+                        Consola.enviar("La contraseña debe tener 6 dígitos.\n")
                     } else {
                         continuar = false
                     }
                 } catch (e: NumberFormatException) {
-                    println("El número introducido no es una contraseña válida.")
+                    Consola.enviar("El número introducido no es una contraseña válida.\n")
                 }
             } while (continuar)
 
             do {
-                print("Repite la contraseña (6 dígitos): ")
+                Consola.enviar("Repite la contraseña (6 dígitos): ")
                 try {
                     pass2 = readln().toInt()
                     if (pass2.toString().length != 6) {
-                        println("La contraseña debe tener 6 dígitos.")
+                        Consola.enviar("La contraseña debe tener 6 dígitos.\n")
                     } else {
                         continuar = false
                     }
                 } catch (e: NumberFormatException) {
-                    println("La contraseña es distinta.")
+                    Consola.enviar("La contraseña es distinta.\n")
                 }
             } while (continuar)
 
@@ -221,8 +220,7 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
      * @return El usuario que ha iniciado sesión, o null si no se encontró ningún usuario.
      */
     fun loginUsuario(): Usuario? {
-        limpiarConsola()
-        println("* Login *")
+        Consola.enviar("\n* Login *\n")
         val usuario = buscarUsuario(pedirNombreUsuarioRegistrado(), pedirPassword())
         if (usuario != null){
             return usuario
@@ -238,8 +236,7 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
      * @return El usuario registrado.
      */
     fun registrarUsuario(): Usuario {
-        limpiarConsola()
-        println("* NUEVO USUARIO *")
+        Consola.enviar("\n* NUEVO USUARIO *\n")
         val nombre = pedirNombreUsuarioNuevo()
         val pass = pedirPasswordNueva()
         val sexo = pedirGenero()
@@ -268,9 +265,9 @@ class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf
         val usuarioEliminar = buscarUsuario(pedirNombreUsuarioRegistrado(), pedirPassword())
         if (usuarioEliminar != null) {
             registroUsuarios.remove(usuarioEliminar)
-            println("Usuario eliminado.")
+            Consola.enviar("Usuario eliminado.\n")
         } else {
-            println("No se encontrado ningún usuario.")
+            Consola.enviar("No se encontrado ningún usuario.\n")
         }
     }
 }

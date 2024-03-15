@@ -4,7 +4,7 @@ import Consola.Consola
 import Entrenamiento.*
 import Pila.Pila
 import Usuario.Usuario
-import limpiarConsola
+
 
 /**
  * Interfaz que define métodos para gestionar la información de los entrenamientos.
@@ -42,6 +42,12 @@ class GestorInfoEntrenamiento: GestorInformacion {
     private var listaVatiosCiclismo = Pila<Double>()
     private var listaRitmoNatacion = Pila<Double>()
 
+    companion object {
+        const val ANSI_RED = "\u001B[31m"
+        const val ANSI_GREEN = "\u001B[32m"
+        const val ANSI_RESET = "\u001B[0m"
+    }
+
     /**
      * Muestra la información del usuario.
      *
@@ -67,7 +73,7 @@ class GestorInfoEntrenamiento: GestorInformacion {
                 Consola.enviar("\n* Datos de tu salida en bici *\n")
                 Consola.enviar("\nDistancia: ${entrenamiento.calcularDistancia()} km.\n")
                 Consola.enviar("Tiempo total: ${entrenamiento.horas} horas, ${entrenamiento.minutos} minutos y ${entrenamiento.segundos} segundos.\n")
-                Consola.enviar("Velocidad media: ${entrenamiento.calcularVelocidadMedia()} km/h.\n")
+                Consola.enviar("Velocidad media: ${entrenamiento.calcularVelocidadMedia().redondear()} km/h.\n")
                 Consola.enviar("Vatios: ${entrenamiento.calcularVatios(usuario).redondear()} W.\n")
                 Consola.enviar("Calorías quemadas: ${entrenamiento.calcularCalorias(usuario).redondear()} calorías.\n")
             }
@@ -122,7 +128,6 @@ class GestorInfoEntrenamiento: GestorInformacion {
      * @param usuario El usuario del cual se mostrará el historial.
      */
     fun mostrarHistorialCiclismo(usuario: Usuario) {
-        limpiarConsola()
         val entrenamientosCiclismo = historial[usuario.nombre]?.filterKeys { it == "Entrenamiento.Ciclismo" }?.values
 
         Consola.enviar("\n* Entrenamiento.Ciclismo *\n")
@@ -138,7 +143,6 @@ class GestorInfoEntrenamiento: GestorInformacion {
      * @param usuario El usuario del cual se mostrará el historial.
      */
     fun mostrarHistorialNatacion(usuario: Usuario) {
-        limpiarConsola()
         val entrenamientosNatacion = historial[usuario.nombre]?.filterKeys { it == "Natación" }?.values
 
         Consola.enviar("\n* Natación *\n")
@@ -183,13 +187,13 @@ class GestorInfoEntrenamiento: GestorInformacion {
                 val ultimoRegistro = pilaCiclismo?.top()
                 if ( ultimoRegistro != null) {
                     if (ultimoRegistro < entrenamiento.calcularVatios(usuario)) {
-                        Consola.enviar("Has mejorado respecto a tu registro anterior.\n")
+                        Consola.enviar("\nHas mejorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
-                        Consola.enviar("   $ultimoRegistro W   ->   ${entrenamiento.calcularVatios(usuario)}W\n")
+                        Consola.enviar("   $ultimoRegistro W      ->   $ANSI_GREEN ${entrenamiento.calcularVatios(usuario)} W$ANSI_RESET\n")
                     } else {
-                        Consola.enviar("Has empeorado respecto a tu registro anterior.\n")
+                        Consola.enviar("\nHas empeorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
-                        Consola.enviar("   $ultimoRegistro W   ->   ${entrenamiento.calcularVatios(usuario)}W\n")
+                        Consola.enviar("   $ultimoRegistro W         ->   $ANSI_RED ${entrenamiento.calcularVatios(usuario)} W$ANSI_RESET\n")
                     }
                 }
             }
@@ -198,16 +202,16 @@ class GestorInfoEntrenamiento: GestorInformacion {
                 val ultimoRegistro = pilaRunning?.top()
                 if ( ultimoRegistro != null) {
                     if (ultimoRegistro > entrenamiento.calcularRitmo()) {
-                        Consola.enviar("Has mejorado respecto a tu registro anterior.\n")
+                        Consola.enviar("\nHas mejorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
                         Consola.enviar(
-                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km\n"
+                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km    ->    $ANSI_GREEN ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km$ANSI_RESET\n"
                         )
                     } else {
-                        Consola.enviar("Has empeorado respecto a tu registro anterior.\n")
+                        Consola.enviar("\nHas empeorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
                         Consola.enviar(
-                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km\n"
+                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km    ->    $ANSI_RED ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km$ANSI_RESET\n"
                         )
                     }
                 }
@@ -217,16 +221,16 @@ class GestorInfoEntrenamiento: GestorInformacion {
                 val ultimoRegistro = pilaNatacion?.top()
                 if ( ultimoRegistro != null) {
                     if (ultimoRegistro > entrenamiento.calcularRitmo()) {
-                        Consola.enviar("Has mejorado respecto a tu registro anterior.\n")
+                        Consola.enviar("\nHas mejorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
                         Consola.enviar(
-                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km\n"
+                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km    ->    $ANSI_GREEN ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km$ANSI_RESET\n"
                         )
                     } else {
-                        Consola.enviar("Has empeorado respecto a tu registro anterior.\n")
+                        Consola.enviar("\nHas empeorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
                         Consola.enviar(
-                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km   ->   ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km\n"
+                            "   ${entrenamiento.formatoRitmo(ultimoRegistro)} min/km    ->    $ANSI_RED ${entrenamiento.formatoRitmo(entrenamiento.calcularRitmo())} min/km$ANSI_RESET\n"
                         )
                     }
                 }
