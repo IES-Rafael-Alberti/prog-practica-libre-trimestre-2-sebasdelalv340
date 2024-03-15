@@ -72,13 +72,16 @@ Los objetos instanciados en el funcionamiento principal son los relativos a las 
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/9419710aa22bd407aa2674b217e939aa228fd963/src/main/kotlin/Main.kt#L8-L14
 
+
 Los objetos relativos a los datos en sí (usuario y entrenamientos) se instancian dentro de los métodos de las clases anteriormente mencionadas, puesto que sus propiedades son introducidas por consola por el usuario.
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/9419710aa22bd407aa2674b217e939aa228fd963/src/main/kotlin/Gestores/RegistroUsuario.kt#L238-L249
 
+
 En cuanto a los constructores, se han utilizado constructores primarios, ya que las propiedades tanto de usuario como de entrenamiento son todas necesarias y de tipo muy concreto. Por lo tanto no existía la necesidad de incorporar constructores secundarios que permitieran instanciar objetos con alguna propiedad menos o de un tipo distinto.
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/9419710aa22bd407aa2674b217e939aa228fd963/src/main/kotlin/Usuario/Usuario.kt#L23-L38
+
 
 Respecto a los métodos, existen múltiples ejemplos diferentes, ya que reciben tanto propiedades, la salida de otro método como objetos.
 Por ejemplo, aquí recibe el resultado de otro método para transformar el formato de salida antes de mostrarlo.
@@ -94,12 +97,15 @@ Se ha definido diversas propiedades estáticas, declaradas como constantes, pues
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/9419710aa22bd407aa2674b217e939aa228fd963/src/main/kotlin/Entrenamiento/Entrenamiento.kt#L35-L49
 
+
 #### **Criterio global 3: Uso de entornos**
 - **(2.i)**: ¿Cómo utilizaste el IDE para el desarrollo de tu proyecto? Describe el proceso de creación, compilación, y prueba de tu programa.
 
 Para el desarrollo del presente proyecto se ha utilizado IntelliJ y la base en Gradle como sistema constructor.
 
-El IDE junto con Github, para almacenar en un repositorio los avances del proyecto, ha permitido guardar diferentes versiones del proyecto a medida que avanzaba en su desarrollo. Al respecto, el IDE facilita mucho la tarea pues nos permite gestionar estos avances sin necesidad de usar la terminal. Si se ha notado, respecto a otros sistemas constructores, que Gradle es más lento a la hora de compilar.
+Una de las grandes utilidades es la guía permanente que realiza el IDE mientras desarrollas tu código. Siempre te va mostrando errores de sintaxis, errores de implementación de herencias, sugerencias sobre las clases, sus propiedades o métodos. Como por ejemplo, cuando te sugiere cambiar alguna propiedad o método a privado si solo está siendo usado dentro de la clase.
+
+También, el IDE junto con Github, para almacenar en un repositorio los avances del proyecto, ha permitido guardar diferentes versiones del proyecto a medida que avanzaba en su desarrollo. Al respecto, el IDE facilita mucho la tarea pues nos permite gestionar estos avances sin necesidad de usar la terminal. Si se ha notado, respecto a otros sistemas constructores, que Gradle es más lento a la hora de compilar.
 
 Otro punto que aporta el IDE es la depuración de código mediante el debuger. Insertando puntos de ruptura en las líneas de código donde creemos que puede estar el problema por el cual el resultado obtenido no es el esperado.
 
@@ -113,7 +119,7 @@ Las pruebas del programas se realizan mediante pruebas unitarias a través de JU
 #### **Criterio global 4: Definir clases y su contenido**
 - **(4.b, 4.c, 4.d, 4.g)**: Explica sobre un ejemplo de tu código, cómo definiste las clases en tu proyecto, es decir como identificaste las de propiedades, métodos y constructores y modificadores del control de acceso a métodos y propiedades, para representar al objeto del mundo real. ¿Cómo contribuyen estas clases a la solución del problema que tu aplicación aborda?
 
-Tenemos una **data class Usuario**. Solo almacena lso datos relativos al usuario.
+Tenemos una **data class Usuario**. Solo almacena los datos relativos al usuario.
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-sebasdelalv340/blob/b2d3cb64c7b7280e8c98d32401ee3f79dd5c132d/src/main/kotlin/Usuario/Usuario.kt#L23-L30
 
