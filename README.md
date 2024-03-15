@@ -67,6 +67,12 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 #### **Criterio global 1: Instancia objetos y hacer uso de ellos**
 - **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? Proporciona ejemplos específicos de tu código.
 
+Los objetos instanciados en el funcionamiento principal son los relativos a las clases que se encargan de la gestión, registro, input/output de datos, así como el menu de usuario.
+
+Los objetos relativos a los datos en sí (usuario y entrenamientos) se instancian dentro de los métodos de las clases anteriormente mencionadas, puesto que sus propiedades son introducidas por consola por el usuario.
+
+
+
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?

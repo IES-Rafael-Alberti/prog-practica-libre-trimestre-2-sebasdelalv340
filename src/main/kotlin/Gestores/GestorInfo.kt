@@ -176,7 +176,7 @@ class GestorInfoEntrenamiento: GestorInformacion {
     }
 
     /**
-     * Función para comparar las mejoras del usuario después de un entrenamiento.
+     * Función para comparar si el usuario ha mejorado respecto al último registro, mostrando la salida en rojo si es peor y en verde sis es mejor.
      * @param usuario El usuario que realizó el entrenamiento.
      * @param entrenamiento El entrenamiento del cual se compararán las mejoras.
      */
@@ -193,7 +193,7 @@ class GestorInfoEntrenamiento: GestorInformacion {
                     } else {
                         Consola.enviar("\nHas empeorado respecto a tu registro anterior.\n")
                         Consola.enviar("Último registro   ->   Registro actual\n")
-                        Consola.enviar("   $ultimoRegistro W         ->   $ANSI_RED ${entrenamiento.calcularVatios(usuario)} W$ANSI_RESET\n")
+                        Consola.enviar("   $ultimoRegistro W      ->   $ANSI_RED ${entrenamiento.calcularVatios(usuario)} W$ANSI_RESET\n")
                     }
                 }
             }

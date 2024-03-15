@@ -12,5 +12,4 @@ fun main() {
     val controlMenu = ControlMenu()
 
     controlMenu.controlMenus(registroUsuario, gestorEntrenamiento, gestorInformacion)
-
 }

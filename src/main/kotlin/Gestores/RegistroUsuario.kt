@@ -8,7 +8,7 @@ import Usuario.Usuario
  * Clase que gestiona el registro de usuarios y operaciones relacionadas con los usuarios.
  * @property registroUsuarios Lista mutable de usuarios registrados.
  */
-class RegistroUsuario(var registroUsuarios: MutableList<Usuario> = mutableListOf()) {
+class RegistroUsuario(private var registroUsuarios: MutableList<Usuario> = mutableListOf()) {
 
     companion object {
         // Almacena los nombres de los usuarios registrados para evitar duplicados.

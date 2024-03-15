@@ -33,6 +33,7 @@ abstract class Entrenamiento(private val km: Int,
     var caloriasQuemadas: Double = calcularCalorias(usuario).redondear()
 
     companion object {
+        // Constantes relacionadas con los cálculos de entrenamiento.
         const val TIEMPO = 60
         const val KM = 1000
         const val MET = 8
@@ -45,7 +46,6 @@ abstract class Entrenamiento(private val km: Int,
         const val MB_PESO_MUJER = 9.247
         const val MB_ALTURA_MUJER = 3.098
         const val MB_EDAD_MUJER = 4.330
-        // Constantes relacionadas con los cálculos de entrenamiento.
     }
 
     /**
